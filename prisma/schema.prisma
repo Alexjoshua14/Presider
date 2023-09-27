@@ -20,8 +20,20 @@ model User {
 model Post {
   id        String  @id @default(cuid())
   title     String
-  image     String
+  image     Image?
+  domColor  String  @default("Teal")
   published Boolean @default(false)
   author    User    @relation(fields: [authorId], references: [id])
   authorId  String
+}
+
+model Image {
+  id       String @id @default(cuid())
+  postID   String @unique
+  img      Bytes
+  height   Int
+  width    Int
+  alt      String
+  domColor String
+  post     Post   @relation(fields: [postID], references: [id])
 }
