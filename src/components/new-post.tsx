@@ -25,6 +25,7 @@ export const NewPostForm = () => {
       title: "",
       caption: "",
       img: "",
+      domColor: "",
     }
   })
 
@@ -48,6 +49,7 @@ export const NewPostForm = () => {
               <FormControl className="rounded min-w-[14rem]">
                 <Input placeholder="title.." {...field} />
               </FormControl>
+              <FormDescription className="text-right text-xs font-light">2/50</FormDescription>
             </FormItem>
           )}
         />
@@ -58,8 +60,9 @@ export const NewPostForm = () => {
             <FormItem>
               <FormLabel>Caption</FormLabel>
               <FormControl className="rounded">
-                <Input placeholder="caption.." {...field} />
+                <Input placeholder="caption.." {...field} type="text" />
               </FormControl>
+              <FormDescription className="text-right text-xs font-light">2/50</FormDescription>
             </FormItem>
           )}
         />
@@ -78,6 +81,24 @@ export const NewPostForm = () => {
                   required
                 />
               </FormControl>
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="domColor"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Dominant Color</FormLabel>
+              <FormControl className="rounded">
+                <Input
+                  placeholder="teal.."
+                  {...field}
+                  type="text"
+
+                />
+              </FormControl>
+              <FormDescription className="text-right text-xs font-light">2/25</FormDescription>
             </FormItem>
           )}
         />

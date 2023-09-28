@@ -1,5 +1,6 @@
 'use client'
 
+import { FC } from 'react'
 import {
   Card,
   CardContent,
@@ -7,11 +8,19 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
+import { Post } from '@/lib/validators/post'
+import { cn } from '@/lib/utils'
 
-export const Post = ({ post }: { post: { title: string, domColor: string } }) => {
+interface PostCardProps {
+  post: Post,
+  className?: String
+}
+
+
+export const PostCard: FC<PostCardProps> = ({ post, className, ...props }) => {
 
   return (
-    <Card>
+    <Card className={cn('rounded', className)} {...props}>
       <CardHeader>
         <CardTitle>
           {post.title}
