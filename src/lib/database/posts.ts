@@ -1,6 +1,6 @@
 'use server'
 
-import { prisma } from "@/lib/prisma"
+import prisma from "@/lib/prisma"
 import { Post } from "../validators/post"
 
 export const getUser = async (id: string) => {
@@ -35,8 +35,8 @@ export const uploadPost = async (post: Post, authorId: string) => {
   console.log("Received a post to upload: " + post);
   const res = await prisma.post.create({
     data: {
-      ...post,
-      authorId
+      authorId,
+      ...post
   }})
 
   return res;
