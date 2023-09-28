@@ -78,3 +78,7 @@
 .center {
   @apply items-center justify-center;
 }
+
+.header {
+  @apply text-3xl font-extralight;
+}

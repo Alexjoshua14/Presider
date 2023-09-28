@@ -32,9 +32,12 @@ export const getImage = async (id: string) => {
 }
 
 export const uploadPost = async (post: Post, authorId: string) => {
+  console.log("Received a post to upload: " + post);
   const res = await prisma.post.create({
     data: {
       ...post,
       authorId
   }})
+
+  return res;
 }

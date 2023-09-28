@@ -16,6 +16,8 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { z } from "zod";
 import { useForm } from "react-hook-form";
+import { uploadPost } from "@/lib/database/posts";
+import { Post } from "@/lib/validators/post";
 
 export const NewPostForm = () => {
 
@@ -33,13 +35,18 @@ export const NewPostForm = () => {
     console.log(values);
 
     // Upload to SQLite database
-
+    const post: Post = {
+      title: values.title,
+      domColor: values.domColor,
+      published: false,
+    }
+    uploadPost(post, "cln23xx4600002jwdg9a4z92u")
     // Capture image and store as BLOB file
   }
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-4">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="grid grid-cols-1 grid-rows-5">
         <FormField
           control={form.control}
           name="title"
@@ -71,7 +78,7 @@ export const NewPostForm = () => {
           name="img"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Caption</FormLabel>
+              <FormLabel>Image</FormLabel>
               <FormControl className="rounded">
                 <Input
                   placeholder="img.."

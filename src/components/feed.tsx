@@ -11,7 +11,7 @@ interface feedProps {
 const feed: FC<feedProps> = ({ posts }) => {
   return (
     <section className="flex flex-col gap-4">
-      <h1 className="text-center text-3xl font-extralight">Feed</h1>
+      <h1 className="text-center header">Feed</h1>
       {posts.map((post) => (
         <PostCard key={post.id} post={post} />
       ))}
