@@ -1,9 +1,8 @@
 
-import { Post } from '@/components/post';
-import { Input } from '@/components/ui/input';
-import { getAllPosts } from '@/lib/database/posts';
 import { useTheme } from 'next-themes'
-import { useEffect, useState } from 'react';
+
+import Feed from '@/components/feed';
+import { getAllPosts } from '@/lib/database/posts';
 
 export default async function Home() {
   // const { setTheme, theme } = useTheme();
@@ -26,9 +25,7 @@ export default async function Home() {
         <h1 className="text-3xl">{`Welcome to Presider`}</h1>
         <p className="font-extralight">{`A site where the featured content affects everything`}</p>
         {/* <button onClick={changeTheme}>Some Darkness</button> */}
-        {posts.map((post) => (
-          <Post key={post.id} post={post} />
-        ))}
+        <Feed posts={posts} />
       </section>
     </main>
   )
