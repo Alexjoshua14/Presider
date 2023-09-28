@@ -1,6 +1,8 @@
 'use client'
 
-import { FC } from 'react'
+import { FC, useRef } from 'react'
+import { useInView, motion } from 'framer-motion'
+
 import {
   Card,
   CardContent,
@@ -10,28 +12,62 @@ import {
 } from '@/components/ui/card'
 import { Post } from '@/lib/validators/post'
 import { cn } from '@/lib/utils'
+import { container, section_1, section_2, section_3 } from '@/lib/variants/cardVariants'
+import { useContainer } from '@/lib/hooks/useContainer'
 
 interface PostCardProps {
   post: Post,
-  className?: String
+  className?: String,
+  background?: String,
 }
 
 
-export const PostCard: FC<PostCardProps> = ({ post, className, ...props }) => {
+export const PostCard: FC<PostCardProps> = ({ post, className, background, ...props }) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: false, amount: .6 });
+
+  const { showContainer } = useContainer(isInView);
 
   return (
-    <Card className={cn('rounded', className)} {...props}>
-      <CardHeader>
-        <CardTitle>
-          {post.title}
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
-        <p>Content here</p>
-      </CardContent>
-      <CardFooter>
-        <p>{post.domColor}</p>
-      </CardFooter>
-    </Card>
+    <motion.div
+      variants={container}
+      initial="hidden"
+      animate={isInView ? "show" : "hidden"}
+      ref={ref}
+    >
+      <Card className={cn(`${showContainer ? "" : "shadow-none"} rounded bg-transparent border-0 flex flex-col`, className)} {...props}
+        style={{ transition: "all 2s cubic-bezier(0.17, 0.55, 0.55, 1) 0s" }}
+      >
+        <motion.div className={cn("rounded-t", background)}
+          transition={{ duration: 0.6 }}
+          variants={section_1}
+        >
+          <CardHeader>
+            <CardTitle>
+              {post.title}
+            </CardTitle>
+          </CardHeader>
+        </motion.div>
+        <motion.div
+          className={cn("flex-1", background)}
+          transition={{ duration: 0.6 }}
+          variants={section_2}
+        >
+          <CardContent>
+            <p>Content here</p>
+          </CardContent>
+        </motion.div>
+        <motion.div
+          className={cn("rounded-b", background)}
+          transition={{ duration: 0.6 }}
+          // style={{ transition: "all 0.6s cubic-bezier(0.17, 0.55, 0.55, 1) 0s" }}
+          variants={section_3}
+        >
+          <CardFooter>
+            <p>{post.domColor}</p>
+          </CardFooter>
+        </motion.div>
+      </Card>
+    </motion.div>
   )
 }
