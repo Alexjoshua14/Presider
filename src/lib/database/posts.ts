@@ -1,6 +1,7 @@
 'use server'
 
 import { prisma } from "@/lib/prisma"
+import { Post } from "../validators/post"
 
 export const getUser = async (id: string) => {
   const res = await prisma.user.findUnique({
@@ -28,4 +29,12 @@ export const getImage = async (id: string) => {
       id
     }
   })
+}
+
+export const uploadPost = async (post: Post, authorId: string) => {
+  const res = await prisma.post.create({
+    data: {
+      ...post,
+      authorId
+  }})
 }
