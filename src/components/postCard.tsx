@@ -12,7 +12,7 @@ import {
 } from '@/components/ui/card'
 import { Post } from '@/lib/validators/post'
 import { cn } from '@/lib/utils'
-import { container, section_1, section_2, section_3 } from '@/lib/variants/cardVariants'
+import { container, section, section_1, section_2, section_3 } from '@/lib/variants/cardVariants'
 import { useContainer } from '@/lib/hooks/useContainer'
 
 interface PostCardProps {
@@ -24,7 +24,7 @@ interface PostCardProps {
 
 export const PostCard: FC<PostCardProps> = ({ post, className, background, ...props }) => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: false, amount: .6 });
+  const isInView = useInView(ref, { once: true, amount: .6 });
 
   const { showContainer } = useContainer(isInView);
 
@@ -40,7 +40,7 @@ export const PostCard: FC<PostCardProps> = ({ post, className, background, ...pr
       >
         <motion.div className={cn("rounded-t", background)}
           transition={{ duration: 0.6 }}
-          variants={section_1}
+          variants={section}
         >
           <CardHeader>
             <CardTitle>
@@ -51,7 +51,7 @@ export const PostCard: FC<PostCardProps> = ({ post, className, background, ...pr
         <motion.div
           className={cn("flex-1", background)}
           transition={{ duration: 0.6 }}
-          variants={section_2}
+          variants={section}
         >
           <CardContent>
             <p>Content here</p>
@@ -61,7 +61,7 @@ export const PostCard: FC<PostCardProps> = ({ post, className, background, ...pr
           className={cn("rounded-b", background)}
           transition={{ duration: 0.6 }}
           // style={{ transition: "all 0.6s cubic-bezier(0.17, 0.55, 0.55, 1) 0s" }}
-          variants={section_3}
+          variants={section}
         >
           <CardFooter>
             <p>{post.domColor}</p>

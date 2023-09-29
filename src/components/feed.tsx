@@ -34,7 +34,7 @@ const Feed: FC<feedProps> = ({ posts }) => {
     <section className={`flex flex-col gap-4`}>
       <h1 className="text-center header">Feed</h1>
       {posts.map((post) => (
-        <PostCard key={post.id} post={post} className="h-[30rem]" background="bg-teal-400 bg-opacity-30 backdrop-blur" />
+        <PostCard key={post.id} post={post} className="h-[20rem]" background="bg-zinc-800 bg-opacity-60 backdrop-blur" />
       ))}
     </section>
   );
